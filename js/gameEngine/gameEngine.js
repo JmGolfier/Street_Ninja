@@ -15,6 +15,10 @@ module.exports = {
         return camera;
     },
 
+    setKeyboardListener: function(listener) {
+        window.onkeydown = listener;
+    },
+
     addRenderElement: function(element) {
         renderElements.push(element);
     },
