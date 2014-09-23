@@ -9,7 +9,8 @@ module.exports = {
         gameEngine.addRenderElement(require("./gameEngine/controls/orbitControls"));
         gameEngine.addRenderElement(require("./gameEngine/misc/stats"));
 
-        gameEngine.addSceneElement(require("./sceneElements/mesh/plane"));
+        gameEngine.addSceneElement(require("./sceneElements/mesh/plane/0"));
+        gameEngine.addSceneElement(require("./sceneElements/mesh/plane/1"));
         gameEngine.addSceneElement(require("./sceneElements/light"));
         gameEngine.addSceneElement(require("./sceneElements/mesh/cube"));
 
