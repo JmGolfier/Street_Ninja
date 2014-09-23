@@ -1,10 +1,11 @@
 var gulp = require('gulp');
 var browserify = require('gulp-browserify');
 var rename = require("gulp-rename");
+var concat = require('gulp-concat');
 
-gulp.task("default", ["scripts", "watch"]);
+gulp.task("default", ["build", "watch"]);
+gulp.task("build", ["scripts", "libs"]);
 
-// Basic usage
 gulp.task('scripts', function() {
     // Single entry point to browserify
     return gulp.src('js/app.js')
@@ -13,7 +14,15 @@ gulp.task('scripts', function() {
             insertGlobals : true,
             debug : true
         }))
-        .pipe(gulp.dest('js'))
+        .pipe(gulp.dest('dist'))
+});
+
+gulp.task('libs', function() {
+    // Single entry point to browserify
+    return gulp.src('libs/**')
+        .pipe(rename("app.min.js"))
+        .pipe(concat('libs.min.js'))
+        .pipe(gulp.dest('dist'))
 });
 
 gulp.task("watch", function() {
