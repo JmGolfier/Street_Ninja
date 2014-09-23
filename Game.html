@@ -3,7 +3,6 @@
 <head>
     <title>Street Ninja - Best game you've ever seen</title>
     <script src="libs/three.js"></script>
-    <script type="text/javascript" src="libs/dat.gui.min.js"></script>
     <script type="text/javascript" src="libs/stats.min.js"></script>
     <script type="text/javascript" src="libs/OrbitControls.js"></script>
     <style>
@@ -96,7 +95,6 @@
         };
 
         //add extras
-        addControlGui(control);
         addStatsObject();
 
         // add the output of the renderer to the html element
@@ -107,12 +105,6 @@
         render();
     }
 
-    function addControlGui(controlObject){
-        var gui = new dat.GUI();
-        gui.add(controlObject, 'rotationSpeed', -0.01, 0.01);
-        gui.add(controlObject, 'opacity', 0.1,1);
-        gui.addColor(controlObject, 'color');
-    }
 
     function addStatsObject(){
         stats = new Stats();
