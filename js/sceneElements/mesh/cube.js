@@ -1,4 +1,3 @@
-var THREE = require("three");
 
 var greenTexture = THREE.ImageUtils.loadTexture("assets/textures/okami.jpg");
 var cube1Geometry = new THREE.BoxGeometry(10, 10, 10);

@@ -1,5 +1,6 @@
-//set global THREE for libs
-THREE = require("three");
+Physijs.scripts.worker = '/lazy_load_libs/physijs_worker.js';
+Physijs.scripts.ammo = '/lazy_load_libs/ammo.js';
+
 var game = require("./game");
 
 window.onload = function () {

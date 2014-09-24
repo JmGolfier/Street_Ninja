@@ -1,4 +1,3 @@
-var THREE = require("three");
 
 var planeTexture = THREE.ImageUtils.loadTexture("assets/textures/wood_1-1024x1024.png");
 var planeGeometry = new THREE.PlaneGeometry(100,100);

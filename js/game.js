@@ -1,4 +1,3 @@
-var THREE = require("three");
 var gameEngine = require("./gameEngine/gameEngine");
 
 module.exports = {

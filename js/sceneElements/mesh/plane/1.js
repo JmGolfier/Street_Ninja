@@ -1,4 +1,3 @@
-var THREE = require("three");
 
 var planeGeometry = new THREE.PlaneGeometry(50,50);
 var simpleVerticalRoadTexture = THREE.ImageUtils.loadTexture("assets/textures/simple_vertical_road.jpg");

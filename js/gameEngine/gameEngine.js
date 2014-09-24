@@ -1,6 +1,5 @@
-var THREE = require("three");
 var camera;
-var scene = new THREE.Scene();
+var scene = new Physijs.Scene;
 var width, height;
 var renderElements = [];
 var renderer;
@@ -66,6 +65,8 @@ function render() {
     for(var i=0; i<renderElements.length; i++) {
         renderElements[i].update();
     }
+
+    scene.simulate(); // run physics
 
     // render using requestAnimationFrame
     requestAnimationFrame(render);

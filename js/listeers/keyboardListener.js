@@ -1,6 +1,5 @@
 var Constants = require("./../Constants");
 var ninja = require("../sceneElements/mesh/ninja");
-var THREE = require("three");
 
 module.exports = function(e) {
     e = e || window.event;
