@@ -24,7 +24,12 @@ module.exports = {
     },
 
     addSceneElement: function(element) {
-        scene.add(element);
+        if(Array.isArray(element)) {
+            for(var i=0; i<element.length; i++) {
+                scene.add(element[i]);
+            }
+        } else
+            scene.add(element);
     },
 
     start: function() {
