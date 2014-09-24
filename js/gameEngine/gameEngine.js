@@ -55,18 +55,18 @@ module.exports = {
 
     loadModel: function(){
         var loader = new THREE.JSONLoader();
-        loader.load("./../ninja_model.js", function (model, loadedMat) {
+        loader.load("/assets/models/ninja_model.json", function (model, loadedMat) {
             loadedMat[0].skinning = true;
 
             THREE.AnimationHandler.add(model.animations[0]);
-            animmesh = new THREE.SkinnedMesh(model, loadedMat[0]);
+            var animesh = new THREE.SkinnedMesh(model, loadedMat[0]);
 
 
-            animmesh.translateY(-2);
-            var animation = new THREE.Animation(animmesh, "");
+            animesh.translateY(-2);
+            var animation = new THREE.Animation(animesh, "");
             animation.play();
 
-            scene.add(animmesh);
+            scene.add(animesh);
         }, "");
     }
 };
