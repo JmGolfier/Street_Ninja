@@ -12,7 +12,7 @@ module.exports = {
         gameEngine.addSceneElement(require("./sceneElements/mesh/plane/1"));
         gameEngine.addSceneElement(require("./sceneElements/light"));
         gameEngine.addSceneElement(require("./sceneElements/mesh/ninja").mesh);
-
+        gameEngine.loadModel();
         gameEngine.setKeyboardListener(require("./listeers/keyboardListener"));
 
         gameEngine.start();

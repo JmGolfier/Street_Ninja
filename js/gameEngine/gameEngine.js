@@ -51,6 +51,23 @@ module.exports = {
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
         renderer.setSize(width, height);
+    },
+
+    loadModel: function(){
+        var loader = new THREE.JSONLoader();
+        loader.load("./../ninja_model.js", function (model, loadedMat) {
+            loadedMat[0].skinning = true;
+
+            THREE.AnimationHandler.add(model.animations[0]);
+            animmesh = new THREE.SkinnedMesh(model, loadedMat[0]);
+
+
+            animmesh.translateY(-2);
+            var animation = new THREE.Animation(animmesh, "");
+            animation.play();
+
+            scene.add(animmesh);
+        }, "");
     }
 };
 
