@@ -15,6 +15,8 @@
 </head>
 <script>
 
+
+
     // global variables
     var renderer;
     var scene;
@@ -23,7 +25,30 @@
     var stats;
     var light;
     var cameraControl;
+    var Constants;
 
+    var controls = function(){
+
+        Constants = {
+            Keyboard:{
+                LEFT:37,
+                RIGHT:39,
+                UP:38,
+                DOWN:40
+            }
+        }
+    };
+
+    function checkKey(e){
+
+        e = e || window.event;
+
+        var action = {};
+        action[Constants.Keyboard.LEFT] = function(){};
+
+        if(action[e.keyCode])
+            action[e.keyCode]()
+    }
     /**
      * Initializes the scene, camera and objects. Called when the window is
      * loaded by using window.onload (see below)
@@ -167,6 +192,10 @@
         // render using requestAnimationFrame
         requestAnimationFrame(render);
         renderer.render(scene, camera);
+    }
+
+    function keyPress(e){
+
     }
 
 

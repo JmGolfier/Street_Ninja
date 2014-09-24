@@ -14,6 +14,8 @@ module.exports = {
         gameEngine.addSceneElement(require("./sceneElements/light"));
         gameEngine.addSceneElement(require("./sceneElements/mesh/cube"));
 
+        gameEngine.setKeyboardListener(require("./keyboardListener"));
+
         gameEngine.start();
     },
 
