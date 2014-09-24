@@ -1,7 +1,7 @@
 module.exports = {
     Keyboard: {
-        LEFT: 68,
-        RIGHT: 81,
+        LEFT: 81,
+        RIGHT: 68,
         UP: 90,
         DOWN: 83
     }
