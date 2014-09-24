@@ -9,9 +9,9 @@ var ninjaMesh = new THREE.Mesh(cube1Geometry, cube1Material);
 ninjaMesh.overdraw = true;
 ninjaMesh.name = 'cube';
 ninjaMesh.castShadow = true;
-ninjaMesh.position.x = 5;
-ninjaMesh.position.y = 3;
-ninjaMesh.position.z = 5;
+ninjaMesh.position.x = 6;
+ninjaMesh.position.y = 6/2;
+ninjaMesh.position.z = 6;
 
 module.exports = {
 

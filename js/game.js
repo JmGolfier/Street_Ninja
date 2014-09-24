@@ -1,4 +1,5 @@
 var gameEngine = require("./gameEngine/gameEngine");
+var buildingGenerator = require("./sceneElements/building_generator");
 
 module.exports = {
     init: function (width, height) {
@@ -9,7 +10,10 @@ module.exports = {
         gameEngine.addRenderElement(require("./gameEngine/misc/stats"));
 
         gameEngine.addSceneElement(require("./sceneElements/mesh/plane/0"));
-        gameEngine.addSceneElement(require("./sceneElements/mesh/plane/1"));
+        //gameEngine.addSceneElement(require("./sceneElements/mesh/plane/1"));
+        //gameEngine.addSceneElement(buildingGenerator.randomBuild(2));
+        gameEngine.addSceneElement(buildingGenerator.randomBuild(4));
+
         gameEngine.addSceneElement(require("./sceneElements/light"));
         gameEngine.addSceneElement(require("./sceneElements/mesh/ninja").mesh);
 
