@@ -1,4 +1,4 @@
 * Installer NodeJS
 * npm install
-* npm install -g gulp
+* npm install -g 
 * gulp
