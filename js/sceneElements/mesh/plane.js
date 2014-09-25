@@ -1,8 +1,8 @@
 
 var planeTexture = THREE.ImageUtils.loadTexture("assets/textures/wood_1-1024x1024.png");
-var planeGeometry = new THREE.PlaneGeometry(100,100);
+var planeGeometry = new THREE.PlaneGeometry(200,200);
 var planeMaterial = new THREE.MeshLambertMaterial({map: planeTexture});
-var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+var plane = new Physijs.PlaneMesh(planeGeometry, planeMaterial);
 plane.receiveShadow = true;
 
 //rotate and position the plane

@@ -4,7 +4,7 @@ var greenTexture = THREE.ImageUtils.loadTexture("assets/textures/okami.jpg");
 var cube1Geometry = new THREE.BoxGeometry(10, 10, 10);
 var cube1Material = new THREE.MeshLambertMaterial({map:greenTexture});
 
-var ninjaMesh = new THREE.Mesh(cube1Geometry, cube1Material);
+var ninjaMesh = new Physijs.BoxMesh(cube1Geometry, cube1Material);
 
 ninjaMesh.overdraw = true;
 ninjaMesh.name = 'cube';

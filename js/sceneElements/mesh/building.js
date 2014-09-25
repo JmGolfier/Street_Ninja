@@ -6,7 +6,7 @@ var buildingTexture = THREE.ImageUtils.loadTexture("assets/textures/okami.png");
 var buildingGeometry = new THREE.BoxGeometry(10, 100, 10);
 var buildingMaterial = new THREE.MeshLambertMaterial({map:buildingTexture});
 
-var building = new THREE.Mesh(buildingGeometry, buildingMaterial);
+var building = new Physijs.BoxMesh(buildingGeometry, buildingMaterial);
 building.overdraw = true;
 building.name = 'building';
 building.castShadow = true;

@@ -4,7 +4,7 @@ var ninja = require("../sceneElements/mesh/ninja");
 module.exports = function(e) {
     e = e || window.event;
 
-    var factor = 0.3;
+    var factor = 5;
     var action = {};
     action[Constants.Keyboard.LEFT] = function(){
         ninja.move(new THREE.Vector3(0, 0, factor))
