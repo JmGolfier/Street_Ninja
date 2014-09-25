@@ -1,10 +1,13 @@
 var Constants = require("./../Constants");
-var ninja = require("../sceneElements/mesh/ninja");
+var ninja;
+require("../sceneElements/mesh/dino").load(function(dino) {
+    ninja = dino;
+});
 
 module.exports = function(e) {
     e = e || window.event;
 
-    var factor = 5;
+    var factor = 50;
     var action = {};
     action[Constants.Keyboard.LEFT] = function(){
         ninja.move(new THREE.Vector3(0, 0, factor))

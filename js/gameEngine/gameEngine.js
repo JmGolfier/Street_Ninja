@@ -3,6 +3,7 @@ var scene = new Physijs.Scene;
 var width, height;
 var renderElements = [];
 var renderer;
+var clock = new THREE.Clock();
 
 module.exports = {
     setCamera: function(newCamera) {
@@ -51,23 +52,6 @@ module.exports = {
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
         renderer.setSize(width, height);
-    },
-
-    loadModel: function(){
-        var loader = new THREE.JSONLoader();
-        loader.load("/assets/models/ninja_model.json", function (model, loadedMat) {
-            loadedMat[0].skinning = true;
-
-            THREE.AnimationHandler.add(model.animations[0]);
-            var animesh = new THREE.SkinnedMesh(model, loadedMat[0]);
-
-
-            animesh.translateY(-2);
-            var animation = new THREE.Animation(animesh, "");
-            animation.play();
-
-            scene.add(animesh);
-        }, "");
     }
 };
 
@@ -79,11 +63,13 @@ function initRenderer() {
 }
 
 function render() {
+    var delta = clock.getDelta();
     for(var i=0; i<renderElements.length; i++) {
         renderElements[i].update();
     }
 
     scene.simulate(); // run physics
+    THREE.AnimationHandler.update(delta);
 
     // render using requestAnimationFrame
     requestAnimationFrame(render);
