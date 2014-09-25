@@ -8,7 +8,7 @@ cube.overdraw = true;
 cube.name = 'cube';
 cube.castShadow = true;
 cube.position.x = 5;
-cube.position.y = 3;
+cube.position.y = 5/2;
 cube.position.z = 5;
 
 module.exports = cube;
