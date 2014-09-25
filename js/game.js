@@ -1,19 +1,26 @@
 var gameEngine = require("./gameEngine/gameEngine");
+var buildingGenerator = require("./sceneElements/building_generator");
+var ninja = require("./sceneElements/mesh/ninja");
+var keyboardListener = require("./listeners/keyboardListener");
 
 module.exports = {
     init: function (width, height) {
         gameEngine.setSize(width, height);
-        gameEngine.setCamera(require("./camera"));
+        gameEngine.setCamera(require("./gameElements/camera"));
 
         gameEngine.addRenderElement(require("./gameEngine/controls/orbitControls"));
         gameEngine.addRenderElement(require("./gameEngine/misc/stats"));
 
-        gameEngine.addSceneElement(require("./sceneElements/mesh/plane/0"));
-        gameEngine.addSceneElement(require("./sceneElements/mesh/plane/1"));
-        gameEngine.addSceneElement(require("./sceneElements/light"));
-        gameEngine.addSceneElement(require("./sceneElements/mesh/ninja").mesh);
+        gameEngine.addSceneElement(require("./sceneElements/mesh/plane"));
+//        gameEngine.addSceneElement(buildingGenerator.randomBuild(4));
 
-        gameEngine.setKeyboardListener(require("./listeers/keyboardListener"));
+        gameEngine.addSceneElement(require("./sceneElements/light"));
+
+        ninja.load(function (ninja) {
+            gameEngine.addSceneElement(ninja.mesh);
+            keyboardListener.setNinja(ninja);
+            gameEngine.setKeyboardListener(keyboardListener.callback);
+        });
 
         gameEngine.start();
     },

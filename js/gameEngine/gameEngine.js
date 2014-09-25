@@ -3,6 +3,7 @@ var scene = new Physijs.Scene;
 var width, height;
 var renderElements = [];
 var renderer;
+var clock = new THREE.Clock();
 
 module.exports = {
     setCamera: function(newCamera) {
@@ -62,11 +63,13 @@ function initRenderer() {
 }
 
 function render() {
+    var delta = clock.getDelta();
     for(var i=0; i<renderElements.length; i++) {
         renderElements[i].update();
     }
 
     scene.simulate(); // run physics
+    THREE.AnimationHandler.update(delta);
 
     // render using requestAnimationFrame
     requestAnimationFrame(render);

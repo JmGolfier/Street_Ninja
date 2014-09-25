@@ -1,27 +1,26 @@
-
-var greenTexture = THREE.ImageUtils.loadTexture("assets/textures/okami.jpg");
-
-var cube1Geometry = new THREE.BoxGeometry(10, 10, 10);
-var cube1Material = new THREE.MeshLambertMaterial({map:greenTexture});
-
-var ninjaMesh = new THREE.Mesh(cube1Geometry, cube1Material);
-
-ninjaMesh.overdraw = true;
-ninjaMesh.name = 'cube';
-ninjaMesh.castShadow = true;
-ninjaMesh.position.x = 5;
-ninjaMesh.position.y = 3;
-ninjaMesh.position.z = 5;
-
 module.exports = {
+    load: function(callback) {
+        var loader = new THREE.JSONLoader();
+        loader.load("/assets/models/estj-dino-anim.json", function (model, loadedMat) {
+            var skinnedMesh = new THREE.SkinnedMesh(model, loadedMat[0]);
+            skinnedMesh.scale.set(15, 15, 15);
+            callback({
+                mesh: skinnedMesh,
+                move: function(direction) {
+                    skinnedMesh.position.x += direction.x;
+                    skinnedMesh.position.y += direction.y;
+                    skinnedMesh.position.z += direction.z;
+                }
+            });
 
-    mesh:ninjaMesh,
-
-    move:function(direction){
-        ninjaMesh.position.x += direction.x;
-        ninjaMesh.position.y += direction.y;
-        ninjaMesh.position.z += direction.z;
-
+            animate(skinnedMesh);
+        }, "");
     }
-
 };
+
+function animate(skinnedMesh) {
+    THREE.AnimationHandler.add(skinnedMesh.geometry.animations[0]);
+    skinnedMesh.material.skinning = true;
+    var animation = new THREE.Animation(skinnedMesh, "ArmatureAction");
+    animation.play();
+}
