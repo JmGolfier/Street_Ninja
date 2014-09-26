@@ -3,7 +3,8 @@ module.exports = {
         LEFT: 81,
         RIGHT: 68,
         UP: 90,
-        DOWN: 83
+        DOWN: 83,
+        SPACE: 32
     },
 
     Paths: {
@@ -13,7 +14,7 @@ module.exports = {
         },
 
         Models: {
-            Ninja: "assets/models/estj-dino-anim.json"
+            Ninja: "assets/3d/ogre/ogro.json"
         }
     }
 };
