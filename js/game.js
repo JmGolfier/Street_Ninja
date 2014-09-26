@@ -17,9 +17,10 @@ module.exports = {
         gameEngine.addSceneElement(require("./sceneElements/light"));
 
         ninja.load(function (ninja) {
-            gameEngine.addSceneElement(ninja.mesh);
+            gameEngine.addSceneElement(ninja.box);
+            gameEngine.addAnimatedElement(ninja.mesh);
             keyboardListener.setNinja(ninja);
-            gameEngine.setKeyboardListener(keyboardListener.callback);
+            gameEngine.setKeyboardListener(keyboardListener.callbacks);
         });
 
         gameEngine.start();
