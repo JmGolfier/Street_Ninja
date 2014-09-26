@@ -17,7 +17,6 @@ module.exports = {
                     z: (Math.random() * 100)
                 }
             });
-            console.log(building);
             buildings.push(building);
         }
         return buildings;

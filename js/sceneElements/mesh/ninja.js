@@ -1,27 +1,55 @@
-
-var greenTexture = THREE.ImageUtils.loadTexture("assets/textures/okami.jpg");
-
-var cube1Geometry = new THREE.BoxGeometry(10, 10, 10);
-var cube1Material = new THREE.MeshLambertMaterial({map:greenTexture});
-
-var ninjaMesh = new THREE.Mesh(cube1Geometry, cube1Material);
-
-ninjaMesh.overdraw = true;
-ninjaMesh.name = 'cube';
-ninjaMesh.castShadow = true;
-ninjaMesh.position.x = 6;
-ninjaMesh.position.y = 6/2;
-ninjaMesh.position.z = 6;
+var Constants = require("../../Constants");
+var started = false;
 
 module.exports = {
+    load: function(callback) {
+        var loader = new THREE.JSONLoader();
+        loader.load("assets/3d/ogre/ogro.json", function(geometry, mat){
+            geometry.computeMorphNormals();
+            mat = new THREE.MeshLambertMaterial({
+                map: THREE.ImageUtils.loadTexture("assets/3d/ogre/skins/skin.jpg"),
+                morphTargets: true, morphNormals:true
+            });
 
-    mesh:ninjaMesh,
+            var mesh = new THREE.MorphAnimMesh(geometry, mat);
 
-    move:function(direction){
-        ninjaMesh.position.x += direction.x;
-        ninjaMesh.position.y += direction.y;
-        ninjaMesh.position.z += direction.z;
+            var temp = new THREE.Box3().setFromObject(mesh);
+            var size = temp.size();
 
+            var boxGeometry = new THREE.BoxGeometry(size.x, size.y, size.z);
+            var boxMaterial = new THREE.MeshLambertMaterial({transparent: true, opacity: 0.3});
+            var box = new Physijs.BoxMesh(boxGeometry, boxMaterial);
+            box.position.y = 30;
+            box.add(mesh);
+
+            callback({
+                box: box,
+                mesh: mesh,
+                move: function(direction) {
+                    if(!started) {
+                        mesh.playAnimation('run', 10);
+                        started = true;
+                    }
+
+//                    move(mesh.position, direction);
+//                    box.__dirtyPosition = true;
+                    box.setLinearVelocity(direction);
+//                    move(box.position, direction);
+                },
+
+                stopMove: function() {
+                    mesh.playAnimation('stand', 10);
+                    box.setLinearVelocity({x: 0, y: 0, z: 0});
+                    started = false;
+                },
+
+                jump: function() {
+                    mesh.playAnimation("jump", 20);
+                }
+            });
+
+            mesh.parseAnimations();
+            mesh.playAnimation('stand', 10);
+        });
     }
-
 };

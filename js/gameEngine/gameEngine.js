@@ -1,8 +1,9 @@
 var camera;
 var scene = new Physijs.Scene;
 var width, height;
-var renderElements = [];
+var renderElements = [], animatedElements = [];
 var renderer;
+var clock = new THREE.Clock();
 
 module.exports = {
     setCamera: function(newCamera) {
@@ -15,7 +16,8 @@ module.exports = {
     },
 
     setKeyboardListener: function(listener) {
-        window.onkeydown = listener;
+        window.onkeydown = listener.onKeyDown;
+        window.onkeyup = listener.onKeyUp;
     },
 
     addRenderElement: function(element) {
@@ -29,6 +31,15 @@ module.exports = {
             }
         } else
             scene.add(element);
+    },
+
+    addSceneAnimatedElement: function(element) {
+        scene.add(element);
+        animatedElements.push(element);
+    },
+
+    addAnimatedElement: function(element) {
+        animatedElements.push(element);
     },
 
     start: function() {
@@ -62,11 +73,17 @@ function initRenderer() {
 }
 
 function render() {
+    var delta = clock.getDelta();
     for(var i=0; i<renderElements.length; i++) {
         renderElements[i].update();
     }
 
+    for(var i=0; i<animatedElements.length; i++) {
+        animatedElements[i].updateAnimation(delta * 1000);
+    }
+
     scene.simulate(); // run physics
+    THREE.AnimationHandler.update(delta);
 
     // render using requestAnimationFrame
     requestAnimationFrame(render);
