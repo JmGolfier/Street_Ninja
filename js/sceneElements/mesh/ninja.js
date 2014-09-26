@@ -1,4 +1,5 @@
 var Constants = require("../../Constants");
+var GameEngine = require("../../gameEngine/gameEngine");
 var started = false;
 
 module.exports = {
@@ -25,16 +26,14 @@ module.exports = {
             callback({
                 box: box,
                 mesh: mesh,
-                move: function(direction) {
+                move: function(direction, key) {
                     if(!started) {
                         mesh.playAnimation('run', 10);
+                        setMeshRotation(mesh, key);
                         started = true;
                     }
 
-//                    move(mesh.position, direction);
-//                    box.__dirtyPosition = true;
                     box.setLinearVelocity(direction);
-//                    move(box.position, direction);
                 },
 
                 stopMove: function() {
@@ -53,3 +52,17 @@ module.exports = {
         });
     }
 };
+
+function setMeshRotation(mesh, key) {
+    var rotation = 0.8;
+    if(key == Constants.Keyboard.UP)
+        mesh.rotation.y = -rotation;
+    else if(key == Constants.Keyboard.LEFT)
+        mesh.rotation.y = rotation;
+    else if(key == Constants.Keyboard.DOWN)
+        mesh.rotation.y = rotation * 3;
+    else if(key == Constants.Keyboard.RIGHT)
+        mesh.rotation.y = rotation * 5;
+    else if(key == Constants.Keyboard.UPLEFT)
+        mesh.rotation.y = 0;
+}

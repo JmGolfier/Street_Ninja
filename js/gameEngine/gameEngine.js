@@ -4,6 +4,7 @@ var width, height;
 var renderElements = [], animatedElements = [];
 var renderer;
 var clock = new THREE.Clock();
+var cameraFollowElement;
 
 module.exports = {
     setCamera: function(newCamera) {
@@ -40,6 +41,10 @@ module.exports = {
 
     addAnimatedElement: function(element) {
         animatedElements.push(element);
+    },
+
+    cameraFollow: function(element) {
+        element.add(camera);
     },
 
     start: function() {

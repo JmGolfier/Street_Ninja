@@ -21,6 +21,7 @@ module.exports = {
             gameEngine.addAnimatedElement(ninja.mesh);
             keyboardListener.setNinja(ninja);
             gameEngine.setKeyboardListener(keyboardListener.callbacks);
+            gameEngine.cameraFollow(ninja.box);
         });
 
         gameEngine.start();

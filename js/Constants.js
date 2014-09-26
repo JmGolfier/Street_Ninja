@@ -1,10 +1,13 @@
 module.exports = {
+    MoveFactor: 50,
+
     Keyboard: {
         LEFT: 81,
         RIGHT: 68,
         UP: 90,
         DOWN: 83,
-        SPACE: 32
+        SPACE: 32,
+        UPLEFT: "upleft"
     },
 
     Paths: {
