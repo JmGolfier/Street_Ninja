@@ -1,7 +1,9 @@
+var Constants = require("../../Constants");
+
 module.exports = {
     load: function(callback) {
         var loader = new THREE.JSONLoader();
-        loader.load("/assets/models/estj-dino-anim.json", function (model, loadedMat) {
+        loader.load(Constants.Paths.Models.Ninja, function (model, loadedMat) {
             var skinnedMesh = new THREE.SkinnedMesh(model, loadedMat[0]);
             skinnedMesh.scale.set(15, 15, 15);
             callback({
