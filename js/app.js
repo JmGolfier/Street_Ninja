@@ -1,5 +1,7 @@
-Physijs.scripts.worker = '/lazy_load_libs/physijs_worker.js';
-Physijs.scripts.ammo = '/lazy_load_libs/ammo.js';
+var Constants = require("./Constants");
+
+Physijs.scripts.worker = Constants.Paths.Physijs.Worker;
+Physijs.scripts.ammo = Constants.Paths.Physijs.Ammo;
 
 var game = require("./game");
 
