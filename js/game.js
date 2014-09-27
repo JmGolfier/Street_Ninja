@@ -1,30 +1,31 @@
+var Constants = require("./Constants");
 var gameEngine = require("./gameEngine/gameEngine");
 var buildingGenerator = require("./sceneElements/building_generator");
-var ninja = require("./sceneElements/mesh/ninja");
-var keyboardListener = require("./listeners/keyboardListener");
 
 module.exports = {
     init: function (width, height) {
-        gameEngine.setSize(width, height);
-        gameEngine.setCamera(require("./gameElements/camera"));
+        gameEngine.loadModels(Constants.Paths.Models, function () {
+            var ninja = require("./sceneElements/mesh/ninja");
+            var keyboardListener = require("./listeners/keyboardListener");
 
-        gameEngine.addRenderElement(require("./gameEngine/controls/orbitControls"));
-        gameEngine.addRenderElement(require("./gameEngine/misc/stats"));
+            gameEngine.setSize(width, height);
+            gameEngine.setCamera(require("./gameElements/camera"));
 
-        gameEngine.addSceneElement(require("./sceneElements/mesh/plane"));
+            gameEngine.addRenderElement(require("./gameEngine/controls/orbitControls"));
+            gameEngine.addRenderElement(require("./gameEngine/misc/stats"));
+
+            gameEngine.addSceneElement(require("./sceneElements/mesh/plane"));
 //        gameEngine.addSceneElement(buildingGenerator.randomBuild(4));
 
-        gameEngine.addSceneElement(require("./sceneElements/light"));
+            gameEngine.addSceneElement(require("./sceneElements/light"));
 
-        ninja.load(function (ninja) {
             gameEngine.addSceneElement(ninja.box);
             gameEngine.addAnimatedElement(ninja.mesh);
-            keyboardListener.setNinja(ninja);
-            gameEngine.setKeyboardListener(keyboardListener.callbacks);
+            gameEngine.setKeyboardListener(keyboardListener);
             gameEngine.cameraFollow(ninja.box);
-        });
 
-        gameEngine.start();
+            gameEngine.start();
+        });
     },
 
     resize: function(width, height) {

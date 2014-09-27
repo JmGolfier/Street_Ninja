@@ -1,10 +1,12 @@
+var async = require("async");
+
 var camera;
 var scene = new Physijs.Scene;
 var width, height;
 var renderElements = [], animatedElements = [];
+var models = {};
 var renderer;
 var clock = new THREE.Clock();
-var cameraFollowElement;
 
 module.exports = {
     setCamera: function(newCamera) {
@@ -47,6 +49,35 @@ module.exports = {
         element.add(camera);
     },
 
+    loadModels: function(modelPaths, callback) {
+        var loader = new THREE.JSONLoader();
+
+        var loadCallbacks = [];
+        for(var modelName in modelPaths)
+            loadCallbacks.push(createLoadModelCallback(modelPaths[modelName], modelName));
+
+        async.parallel(loadCallbacks, function(err, results) {
+            for(var i=0; i<results.length; i++) {
+                models[results[i].name] = results[i].value;
+            }
+            callback();
+        });
+
+        function createLoadModelCallback(path, name) {
+            return function(callback) {
+                loader.load(path, function (geometry, material) {
+                    callback(null, {
+                        value: {
+                            geometry: geometry,
+                            material: material
+                        },
+                        name: name
+                    });
+                });
+            };
+        }
+    },
+
     start: function() {
         initRenderer();
 
@@ -67,7 +98,9 @@ module.exports = {
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
         renderer.setSize(width, height);
-    }
+    },
+
+    models: models
 };
 
 function initRenderer() {
