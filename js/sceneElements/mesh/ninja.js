@@ -1,70 +1,14 @@
-var Constants = require("../../Constants");
 var gameEngine = require("../../gameEngine/gameEngine");
+var Constants = require("../../Constants");
 
 var ninjaModel = gameEngine.models[Constants.Models.Ninja];
 var mesh = createMesh(ninjaModel);
 var box = createBox(mesh);
 
 module.exports = {
-    box: box,
     mesh: mesh,
-    move: move,
-    stopMove: stopMove,
-    jump: jump
+    box: box
 };
-
-mesh.parseAnimations();
-mesh.playAnimation('stand', 10);
-
-var started = false;
-
-function move(direction, key) {
-    if(!started) {
-        mesh.playAnimation('run', 10);
-        setMeshRotation(mesh, key);
-        started = true;
-    }
-
-    box.setLinearVelocity(direction);
-}
-
-function setMeshRotation(mesh, key) {
-    var rotation = 0.8;
-    var keyBoardRotation = {};
-    keyBoardRotation[Constants.Keyboard.UP] = -rotation;
-    keyBoardRotation[Constants.Keyboard.LEFT] = rotation;
-    keyBoardRotation[Constants.Keyboard.DOWN] = rotation * 3;
-    keyBoardRotation[Constants.Keyboard.RIGHT] = rotation * 5;
-
-    keyBoardRotation[Constants.Keyboard.UPLEFT] = 0;
-    keyBoardRotation[Constants.Keyboard.UPRIGHT] = rotation*6;
-    keyBoardRotation[Constants.Keyboard.DOWNLEFT] = rotation*2;
-    keyBoardRotation[Constants.Keyboard.DOWNRIGHT] = rotation*4;
-
-    mesh.rotation.y = keyBoardRotation[key];
-}
-
-function stopMove() {
-    mesh.playAnimation('stand', 10);
-    box.setLinearVelocity({x: 0, y: 0, z: 0});
-    started = false;
-}
-
-function jump() {
-    mesh.playAnimation("jump", 20);
-}
-
-function createMesh(ninjaModel) {
-    var geometry = ninjaModel.geometry;
-
-    geometry.computeMorphNormals();
-    var mat = new THREE.MeshLambertMaterial({
-        map: THREE.ImageUtils.loadTexture(Constants.Paths.Skins.Ninja),
-        morphTargets: true, morphNormals: true
-    });
-
-    return new THREE.MorphAnimMesh(geometry, mat);
-}
 
 function createBox(mesh) {
     var temp = new THREE.Box3().setFromObject(mesh);
@@ -76,4 +20,11 @@ function createBox(mesh) {
     box.position.y = 30;
     box.add(mesh);
     return box;
+}
+
+function createMesh(ninjaModel) {
+    var skinnedMesh = new THREE.SkinnedMesh(ninjaModel.geometry, new THREE.MeshFaceMaterial(ninjaModel.material));
+    skinnedMesh.position.y = 50;
+    skinnedMesh.scale.set(15, 15, 15);
+    return skinnedMesh;
 }

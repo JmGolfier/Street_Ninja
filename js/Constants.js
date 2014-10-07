@@ -18,16 +18,19 @@ module.exports = {
         },
 
         Models: {
-            Ninja: "assets/3d/ogre/ogro.json",
+            Ogre: "assets/3d/ogre/ogro.json",
+            Ninja: "assets/3d/ninja/ninja.json",
             Dino: "assets/models/estj-dino-anim.json"
         },
 
         Skins: {
+            Ogre: "assets/3d/ogre/skins/skin.jpg",
             Ninja: "assets/3d/ogre/skins/skin.jpg"
         }
     },
 
     Models: {
-        Ninja: "Ninja"
+        Ninja: "Ninja",
+        Ogre: "Ogre"
     }
 };
