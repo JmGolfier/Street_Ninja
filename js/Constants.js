@@ -4,7 +4,11 @@ module.exports = {
         RIGHT: 68,
         UP: 90,
         DOWN: 83,
-        SPACE: 32
+        SPACE: 32,
+        UPLEFT: "upleft",
+        UPRIGHT: "upright",
+        DOWNLEFT: "downleft",
+        DOWNRIGHT: "downright"
     },
 
     Paths: {
@@ -14,7 +18,16 @@ module.exports = {
         },
 
         Models: {
-            Ninja: "assets/3d/ogre/ogro.json"
+            Ninja: "assets/3d/ogre/ogro.json",
+            Dino: "assets/models/estj-dino-anim.json"
+        },
+
+        Skins: {
+            Ninja: "assets/3d/ogre/skins/skin.jpg"
         }
+    },
+
+    Models: {
+        Ninja: "Ninja"
     }
 };
