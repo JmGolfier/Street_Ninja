@@ -20,13 +20,15 @@ module.exports = {
 
             gameEngine.addSceneElement(require("./sceneElements/light"));
 
-            gameEngine.addSceneElement(ogre.box);
-            gameEngine.addAnimatedElement(ogre.mesh);
-            gameEngine.setKeyboardListener(keyboardListener);
-            gameEngine.cameraFollow(ogre.box);
+//            gameEngine.addSceneElement(ogre.box);
+//            gameEngine.addAnimatedElement(ogre.mesh);
+//            gameEngine.setKeyboardListener(keyboardListener);
+//            gameEngine.cameraFollow(ogre.box);
 
-//            gameEngine.addSceneElement(ninja.box);
-//            gameEngine.addSceneElement(ninja.mesh);
+            gameEngine.addSceneElement(ninja.box);
+            gameEngine.addAnimatedElement(ninja.mesh);
+            gameEngine.setKeyboardListener(keyboardListener);
+            gameEngine.cameraFollow(ninja.box);
 
             gameEngine.start();
         });

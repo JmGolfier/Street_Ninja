@@ -1,13 +1,13 @@
 var Constants = require("./../Constants");
-var ogre = require("../sceneElements/mesh/ogre");
+var ogre = require("../sceneElements/mesh/ninja");
 
 var keyPressed = {length: 0};
 var doubleKey = false;
 
 var action = {};
-var factor = 50;
-var rotationFactor = 45;
-var diagoSpeedFactor = 1.3;
+var factor = 20;
+var rotationFactor = 20;
+var diagoSpeedFactor = 1.4;
 
 action[Constants.Keyboard.UP] = createMoveCallback(new THREE.Vector3(-factor, 0, -rotationFactor), Constants.Keyboard.UP);
 action[Constants.Keyboard.DOWN] = createMoveCallback(new THREE.Vector3(factor, 0, rotationFactor), Constants.Keyboard.DOWN);

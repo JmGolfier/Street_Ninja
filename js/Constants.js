@@ -25,7 +25,7 @@ module.exports = {
 
         Skins: {
             Ogre: "assets/3d/ogre/skins/skin.jpg",
-            Ninja: "assets/3d/ogre/skins/skin.jpg"
+            Ninja: "assets/3d/ninja/nskinbr.jpg"
         }
     },
 
