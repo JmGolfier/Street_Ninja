@@ -8,7 +8,8 @@ module.exports = {
         UPLEFT: "upleft",
         UPRIGHT: "upright",
         DOWNLEFT: "downleft",
-        DOWNRIGHT: "downright"
+        DOWNRIGHT: "downright",
+        ENTER: 13
     },
 
     Paths: {
@@ -32,5 +33,9 @@ module.exports = {
     Models: {
         Ninja: "Ninja",
         Ogre: "Ogre"
+    },
+
+    Callbacks: {
+        OnDeath: "onDeath"
     }
 };

@@ -23,6 +23,10 @@ action[Constants.Keyboard.SPACE] = function(){
     ogre.jump();
 };
 
+action[Constants.Keyboard.ENTER] = function(){
+    ogre.getDamage(1);
+};
+
 module.exports = {
     onKeyDown: function(e) {
         e = e || window.event;

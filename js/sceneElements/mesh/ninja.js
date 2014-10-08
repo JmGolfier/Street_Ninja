@@ -1,16 +1,26 @@
 var Constants = require("../../Constants");
 var gameEngine = require("../../gameEngine/gameEngine");
+var HealthBar = require("../../gameElements/healthBar");
 
 var ninjaModel = gameEngine.models[Constants.Models.Ninja];
 var mesh = createMesh(ninjaModel);
 var box = createBox(mesh);
+
+var healthBarCallbacks = {};
+healthBarCallbacks[Constants.Callbacks.OnDeath] = onDeath;
+var healthBar = new HealthBar({
+    startHealth: 100,
+    box: box,
+    callbacks: healthBarCallbacks
+});
 
 module.exports = {
     box: box,
     mesh: mesh,
     move: move,
     stopMove: stopMove,
-    jump: jump
+    jump: jump,
+    getDamage: getDamage
 };
 
 mesh.parseAnimations();
@@ -76,4 +86,12 @@ function stopMove() {
 
 function jump() {
     mesh.playAnimation("jump", 10);
+}
+
+function getDamage(damage) {
+    healthBar.getDamage(damage);
+}
+
+function onDeath() {
+    mesh.playAnimation("death", 10);
 }
