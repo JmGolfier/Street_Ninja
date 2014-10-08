@@ -9,6 +9,9 @@ module.exports = {
             var ninja = require("./sceneElements/mesh/ninja");
             var keyboardListener = require("./listeners/keyboardListener");
             var walls = require("./sceneElements/mesh/walls");
+            var cube = require("./sceneElements/mesh/cube");
+
+            gameEngine.addSceneElement(cube);
 
             gameEngine.setSize(width, height);
             gameEngine.setCamera(require("./gameElements/camera"));

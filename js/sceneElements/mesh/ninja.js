@@ -44,7 +44,7 @@ function createBox(mesh) {
 
     var boxGeometry = new THREE.BoxGeometry(size.x, size.y, size.z);
     var boxMaterial = new THREE.MeshLambertMaterial({transparent: true, opacity: 0.3});
-    box = new Physijs.BoxMesh(boxGeometry, boxMaterial);
+    box = new Physijs.BoxMesh(boxGeometry, boxMaterial, 1000);
     box.position.y = 10;
     mesh.position.y = -size.y/2;
     box.add(mesh);
