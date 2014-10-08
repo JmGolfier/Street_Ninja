@@ -1,13 +1,13 @@
 var Constants = require("./../Constants");
-var ninja = require("../sceneElements/mesh/ninja");
+var ogre = require("../sceneElements/mesh/ninja");
 
 var keyPressed = {length: 0};
 var doubleKey = false;
 
 var action = {};
-var factor = 50;
-var rotationFactor = 45;
-var diagoSpeedFactor = 1.3;
+var factor = 20;
+var rotationFactor = 20;
+var diagoSpeedFactor = 1.4;
 
 action[Constants.Keyboard.UP] = createMoveCallback(new THREE.Vector3(-factor, 0, -rotationFactor), Constants.Keyboard.UP);
 action[Constants.Keyboard.DOWN] = createMoveCallback(new THREE.Vector3(factor, 0, rotationFactor), Constants.Keyboard.DOWN);
@@ -20,7 +20,7 @@ action[Constants.Keyboard.DOWNLEFT] = createMoveCallback(new THREE.Vector3(0, 0,
 action[Constants.Keyboard.DOWNRIGHT] = createMoveCallback(new THREE.Vector3(factor*diagoSpeedFactor, 0, 0), Constants.Keyboard.DOWNRIGHT);
 
 action[Constants.Keyboard.SPACE] = function(){
-    ninja.jump();
+    ogre.jump();
 };
 
 module.exports = {
@@ -38,7 +38,7 @@ module.exports = {
         if(keyPressed.length == 2) {
             if(!doubleKey) {
                 doubleKey = true;
-                ninja.stopMove();
+                ogre.stopMove();
             }
             if(keyPressed[Constants.Keyboard.UP] && keyPressed[Constants.Keyboard.LEFT])
                 keyCode = Constants.Keyboard.UPLEFT;
@@ -60,17 +60,17 @@ module.exports = {
 
         if(keyPressed.length == 1 && action[e.keyCode]) {
             for(var key in keyPressed) {
-                ninja.stopMove();
+                ogre.stopMove();
                 if(action[key]) action[key]();
                 break;
             }
         } else
-            ninja.stopMove();
+            ogre.stopMove();
     }
 };
 
 function createMoveCallback(direction, key) {
     return function() {
-        ninja.move(direction, key);
+        ogre.move(direction, key);
     };
 }

@@ -5,6 +5,7 @@ var buildingGenerator = require("./sceneElements/building_generator");
 module.exports = {
     init: function (width, height) {
         gameEngine.loadModels(Constants.Paths.Models, function () {
+            var ogre = require("./sceneElements/mesh/ogre");
             var ninja = require("./sceneElements/mesh/ninja");
             var enemy = require("./sceneElements/mesh/enemy");
             var keyboardListener = require("./listeners/keyboardListener");
@@ -20,16 +21,15 @@ module.exports = {
 
             gameEngine.addSceneElement(require("./sceneElements/light"));
 
-            //gameEngine.addSceneElement(ninja.box);
-            //gameEngine.addAnimatedElement(ninja.mesh);
-            //gameEngine.setKeyboardListener(keyboardListener);
-            //gameEngine.cameraFollow(ninja.box);
+//            gameEngine.addSceneElement(ogre.box);
+//            gameEngine.addAnimatedElement(ogre.mesh);
+//            gameEngine.setKeyboardListener(keyboardListener);
+//            gameEngine.cameraFollow(ogre.box);
 
-
-            gameEngine.addSceneElement(enemy.box);
-            gameEngine.addAnimatedElement(enemy.mesh);
+            gameEngine.addSceneElement(ninja.box);
+            gameEngine.addAnimatedElement(ninja.mesh);
             gameEngine.setKeyboardListener(keyboardListener);
-            gameEngine.cameraFollow(enemy.box);
+            gameEngine.cameraFollow(ninja.box);
 
             gameEngine.start();
         });
