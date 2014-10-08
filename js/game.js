@@ -8,6 +8,7 @@ module.exports = {
             var ogre = require("./sceneElements/mesh/ogre");
             var ninja = require("./sceneElements/mesh/ninja");
             var keyboardListener = require("./listeners/keyboardListener");
+            var walls = require("./sceneElements/mesh/walls");
 
             gameEngine.setSize(width, height);
             gameEngine.setCamera(require("./gameElements/camera"));
@@ -16,6 +17,9 @@ module.exports = {
             gameEngine.addRenderElement(require("./gameEngine/misc/stats"));
 
             gameEngine.addSceneElement(require("./sceneElements/mesh/plane"));
+            for(var i=0; i<walls.length; i++) {
+                gameEngine.addSceneElement(walls[i]);
+            }
 //        gameEngine.addSceneElement(buildingGenerator.randomBuild(4));
 
             gameEngine.addSceneElement(require("./sceneElements/light"));

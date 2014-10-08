@@ -37,5 +37,7 @@ module.exports = {
 
     Callbacks: {
         OnDeath: "onDeath"
-    }
+    },
+
+    TerrainSize: 200
 };
