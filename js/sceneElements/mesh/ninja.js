@@ -1,58 +1,30 @@
 var Constants = require("../../Constants");
 var gameEngine = require("../../gameEngine/gameEngine");
+var HealthBar = require("../../gameElements/healthBar");
 
 var ninjaModel = gameEngine.models[Constants.Models.Ninja];
 var mesh = createMesh(ninjaModel);
 var box = createBox(mesh);
+
+var healthBarCallbacks = {};
+healthBarCallbacks[Constants.Callbacks.OnDeath] = onDeath;
+var healthBar = new HealthBar({
+    startHealth: 100,
+    box: box,
+    callbacks: healthBarCallbacks
+});
 
 module.exports = {
     box: box,
     mesh: mesh,
     move: move,
     stopMove: stopMove,
-    jump: jump
+    jump: jump,
+    getDamage: getDamage
 };
 
 mesh.parseAnimations();
-mesh.playAnimation('stand', 10);
-
-var started = false;
-
-function move(direction, key) {
-    if(!started) {
-        mesh.playAnimation('run', 10);
-        setMeshRotation(mesh, key);
-        started = true;
-    }
-
-    box.setLinearVelocity(direction);
-}
-
-function setMeshRotation(mesh, key) {
-    var rotation = 0.8;
-    var keyBoardRotation = {};
-    keyBoardRotation[Constants.Keyboard.UP] = -rotation;
-    keyBoardRotation[Constants.Keyboard.LEFT] = rotation;
-    keyBoardRotation[Constants.Keyboard.DOWN] = rotation * 3;
-    keyBoardRotation[Constants.Keyboard.RIGHT] = rotation * 5;
-
-    keyBoardRotation[Constants.Keyboard.UPLEFT] = 0;
-    keyBoardRotation[Constants.Keyboard.UPRIGHT] = rotation*6;
-    keyBoardRotation[Constants.Keyboard.DOWNLEFT] = rotation*2;
-    keyBoardRotation[Constants.Keyboard.DOWNRIGHT] = rotation*4;
-
-    mesh.rotation.y = keyBoardRotation[key];
-}
-
-function stopMove() {
-    mesh.playAnimation('stand', 10);
-    box.setLinearVelocity({x: 0, y: 0, z: 0});
-    started = false;
-}
-
-function jump() {
-    mesh.playAnimation("jump", 20);
-}
+mesh.playAnimation('idle', 10);
 
 function createMesh(ninjaModel) {
     var geometry = ninjaModel.geometry;
@@ -72,8 +44,54 @@ function createBox(mesh) {
 
     var boxGeometry = new THREE.BoxGeometry(size.x, size.y, size.z);
     var boxMaterial = new THREE.MeshLambertMaterial({transparent: true, opacity: 0.3});
-    box = new Physijs.BoxMesh(boxGeometry, boxMaterial);
-    box.position.y = 30;
+    box = new Physijs.BoxMesh(boxGeometry, boxMaterial, 1000);
+    box.position.y = 10;
+    mesh.position.y = -size.y/2;
     box.add(mesh);
     return box;
+}
+
+var started = false;
+
+function move(direction, key) {
+    if(!started) {
+        mesh.playAnimation('walk', 20);
+        setMeshRotation(mesh, key);
+        started = true;
+    }
+
+    box.setLinearVelocity(direction);
+}
+
+function setMeshRotation(mesh, key) {
+    var rotation = 0.8;
+    var keyBoardRotation = {};
+    keyBoardRotation[Constants.Keyboard.UPRIGHT] = 0;
+    keyBoardRotation[Constants.Keyboard.RIGHT] = -rotation;
+    keyBoardRotation[Constants.Keyboard.DOWNRIGHT] = -rotation * 2;
+    keyBoardRotation[Constants.Keyboard.DOWN] = -rotation * 3;
+    keyBoardRotation[Constants.Keyboard.DOWNLEFT] = -rotation*4;
+    keyBoardRotation[Constants.Keyboard.LEFT] = -rotation*5;
+    keyBoardRotation[Constants.Keyboard.UPLEFT] = -rotation*6;
+    keyBoardRotation[Constants.Keyboard.UP] = -rotation*7;
+
+    mesh.rotation.y = keyBoardRotation[key];
+}
+
+function stopMove() {
+    mesh.playAnimation('idle', 10);
+    box.setLinearVelocity({x: 0, y: 0, z: 0});
+    started = false;
+}
+
+function jump() {
+    mesh.playAnimation("jump", 10);
+}
+
+function getDamage(damage) {
+    healthBar.getDamage(damage);
+}
+
+function onDeath() {
+    mesh.playAnimation("death", 10);
 }

@@ -8,7 +8,8 @@ module.exports = {
         UPLEFT: "upleft",
         UPRIGHT: "upright",
         DOWNLEFT: "downleft",
-        DOWNRIGHT: "downright"
+        DOWNRIGHT: "downright",
+        ENTER: 13
     },
 
     Paths: {
@@ -18,16 +19,25 @@ module.exports = {
         },
 
         Models: {
-            Ninja: "assets/3d/ogre/ogro.json",
+            Ogre: "assets/3d/ogre/ogro.json",
+            Ninja: "assets/3d/ninja/ninja.json",
             Dino: "assets/models/estj-dino-anim.json"
         },
 
         Skins: {
-            Ninja: "assets/3d/ogre/skins/skin.jpg"
+            Ogre: "assets/3d/ogre/skins/skin.jpg",
+            Ninja: "assets/3d/ninja/nskinbr.jpg"
         }
     },
 
     Models: {
-        Ninja: "Ninja"
-    }
+        Ninja: "Ninja",
+        Ogre: "Ogre"
+    },
+
+    Callbacks: {
+        OnDeath: "onDeath"
+    },
+
+    TerrainSize: 200
 };

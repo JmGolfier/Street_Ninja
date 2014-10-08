@@ -1,5 +1,7 @@
+var Constants = require("../../Constants");
+
 var planeTexture = THREE.ImageUtils.loadTexture("assets/textures/wood_1-1024x1024.png");
-var planeGeometry = new THREE.PlaneGeometry(2000,2000);
+var planeGeometry = new THREE.PlaneGeometry(Constants.TerrainSize,Constants.TerrainSize);
 var planeMaterial = Physijs.createMaterial(new THREE.MeshPhongMaterial({map: planeTexture}), 0, 0);
 var plane = new Physijs.BoxMesh(planeGeometry, planeMaterial, 0);
 plane.receiveShadow = true;
