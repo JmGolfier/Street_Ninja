@@ -7,6 +7,7 @@ module.exports = {
         gameEngine.loadModels(Constants.Paths.Models, function () {
             var ogre = require("./sceneElements/mesh/ogre");
             var ninja = require("./sceneElements/mesh/ninja");
+            var enemy = require("./sceneElements/mesh/enemy");
             var keyboardListener = require("./listeners/keyboardListener");
 
             gameEngine.setSize(width, height);
