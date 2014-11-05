@@ -42,10 +42,23 @@ function createBox(mesh) {
     var temp = new THREE.Box3().setFromObject(mesh);
     var size = temp.size();
 
-    var boxGeometry = new THREE.BoxGeometry(size.x, size.y, size.z);
-    var boxMaterial = new THREE.MeshLambertMaterial({transparent: true, opacity: 0.3});
-    box = new Physijs.BoxMesh(boxGeometry, boxMaterial, 1000);
+    //Spere Mesh: Divide by 2
+    var boxGeometry = new THREE.BoxGeometry(size.x/2, size.y, size.z/2);
+
+    var friction = 0;
+    var restitution = 0;
+    var boxMaterial = Physijs.createMaterial(new THREE.MeshLambertMaterial({transparent: true, opacity: 0}), friction, restitution);
+
+    box = new Physijs.SphereMesh(boxGeometry, boxMaterial, 1);
     box.position.y = 10;
+
+    box.addEventListener( 'collision', function( other_object, linear_velocity, angular_velocity ) {
+        // `this` is the mesh with the event listener
+        // other_object is the object `this` collided with
+        // linear_velocity and angular_velocity are Vector3 objects which represent the velocity of the collision
+        console.log("collision");
+    });
+
     mesh.position.y = -size.y/2;
     box.add(mesh);
     return box;
